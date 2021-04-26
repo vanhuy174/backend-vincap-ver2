@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home.index');
-});
 
 Route::get('lang/{lang}', function (){
     $langActive = ['en', 'vi'];
@@ -26,6 +23,12 @@ Route::get('lang/{lang}', function (){
     return redirect()->back();
 })->name('lang');
 
+Route::group([], function (){
+    Route::resource('/', \App\Http\Controllers\HomeController::class);
+    Route::resource('/blogs', \App\Http\Controllers\BlogController::class);
+    Route::resource('about', \App\Http\Controllers\AboutController::class);
+    Route::resource('contact', \App\Http\Controllers\ContactController::class);
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
