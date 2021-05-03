@@ -20,7 +20,7 @@ class BlogController extends Controller
         if(!is_null($keyword)){
             $blogs= Post::where('title', 'like', '%'.$keyword.'%')->where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->paginate(12);
         }else{
-            $blogs= Post::where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->paginate(12);
+            $blogs= Post::where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->paginate(2);
         }
         $page= Page::where('slug', 'blogs')->withTranslation()->firstOrFail();
         return view('frontend/blog/index', compact('page', 'blogs'));

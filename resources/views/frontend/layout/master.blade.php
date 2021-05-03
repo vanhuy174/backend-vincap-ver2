@@ -1,8 +1,11 @@
+@php
+    $lang = app()->getLocale();
+@endphp
 <!DOCTYPE html>
-<html>
+<html lang="{{ $lang }}">
 <head>
     <meta charset="utf-8">
-    <title>VinCapPAID.JSC</title>
+    <title>{{ setting("$lang.title") }}</title>
     <!-- Stylesheets -->
     <link rel="icon" href="{{ asset('assets/images/logo-1.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
@@ -11,6 +14,7 @@
     <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="{{ setting("$lang.description") }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

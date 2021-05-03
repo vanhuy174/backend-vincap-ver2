@@ -3,29 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use App\Slide;
-use App\Team;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Page;
 use TCG\Voyager\Models\Post;
 
-class HomeController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $slides =   Slide::with('translations')->get();
-        $projects= Product::where('type', 'project')->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->limit(4)->get();
-        $blogs= Post::where('status', 'PUBLISHED')->where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->limit(3)->get();
-        $about= Page::where('slug', 'about')->withTranslation()->firstOrFail();
-        $services =Product::where('type', 'service')->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->limit(6)->get();
-        $teams =Team::orderBy('created_at', 'DESC')->withTranslation()->get();
+        $datas= Product::where('type', 'product')->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->paginate(12);
+        $latestBlog= Post::where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->limit(6)->get();
+        $title= "Product";
 
-        return view('frontend.home.index', compact('slides', 'projects', 'blogs', 'about', 'services', 'teams'));
+        return view('frontend/product/index', compact('datas', 'title', 'latestBlog'));
     }
 
     /**
@@ -57,7 +52,10 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+//        $page= Page::where('slug', 'blogs')->withTranslation()->firstOrFail();
+        $data= Product::where('slug', $id)->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->firstOrFail();
+//        $latestBlog= Post::where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->limit(6)->get();
+        return view('frontend/product/productDetail', compact('data',  ));
     }
 
     /**

@@ -5,8 +5,8 @@
             <div class="info-outer">
                 <!--Info Box-->
                 <ul class="info-box clearfix">
-                    <li><span class="icon fa fa-envelope-o"></span><a href="mailto:{{ setting('info.email') }}">{{ setting('info.email') }}</a></li>
-                    <li><span class="icon flaticon-technology-5"></span><a href="tel:{{ setting('info.phone') }}">{{ setting('info.phone') }}</a></li>
+                    <li><span class="icon fa fa-envelope-o"></span><a href="mailto:{{ setting("$lang.email") }}">{{ setting("$lang.email") }}</a></li>
+                    <li><span class="icon flaticon-technology-5"></span><a href="tel:{{ setting("$lang.phone") }}">{{ setting("$lang.phone") }}</a></li>
                     <li class="social-links-one">
                         <a href="{{ route('lang', 'vi') }}" class="facebook img-circle"><img src="{{ asset('assets/images/flags/vi.gif') }}" alt="vi" width="20px"></a>
                         <a href="{{ route('lang', 'en') }}" class="facebook img-circle"><img src="{{ asset('assets/images/flags/en.gif') }}" alt="vi" width="20px"></a>

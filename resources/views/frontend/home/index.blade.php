@@ -146,14 +146,73 @@
         </div>
     </section>
 
+    <section class="events-section latest-events">
+        <div class="auto-container">
+
+            <div class="sec-title text-center">
+                <h2>{{ __('Services') }}</h2>
+                <div class="text">Chúng tôi luôn mong muốn mang đến những dịch vụ tốt nhất cho đối tác - khách hàng</div>
+            </div>
+            <div class="row clearfix">
+                @if($services)
+                    @foreach($services as $key=>$service)
+                        @if($key > 1)
+                            @break
+                        @endif
+                <!--Featured Column-->
+                <div class="column default-featured-column style-two col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <article class="inner-box">
+                        <figure class="image-box">
+                            <a href="{{ route('service.show', $service->slug) }}"><img src="{{ Voyager::image( $service->image ) }}" alt="{{ $service->translate()->title }}"></a>
+                        </figure>
+                        <div class="content-box">
+                            <h3><a href="{{ route('service.show', $service->slug) }}">{{ $service->translate()->title }}</a></h3>
+                            <div class="column-info">{{ $service->created_at->format('d/m/Y') }}</div>
+                            <div class="text">{{ \Illuminate\Support\Str::limit($service->translate()->excerpt, 120,'...') }}</div>
+                            <a href="{{ route('service.show', $service->slug) }}" class="theme-btn btn-style-three">{{ __('Read More') }}</a>
+                        </div>
+                    </article>
+                </div>
+                    @endforeach
+
+                <!--Cause Column-->
+                <div class="column default-featured-column links-column col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <article class="inner-box">
+                        <div class="vertical-links-outer">
+                            @foreach($services as $key=>$service)
+                                @if($key < 2)
+                                    @continue
+                                @endif
+                                <div class="link-block">
+                                    <div class="default inner">
+                                        <figure class="image-thumb">
+                                            <img src="{{ Voyager::image( $service->image ) }}" alt="{{ $service->translate()->title }}">
+                                        </figure>
+                                        <strong>{{ $service->translate()->title }}</strong>
+                                        <span class="desc">{{ \Illuminate\Support\Str::limit($service->translate()->excerpt, 120,'...') }}</span>
+                                    </div>
+                                    <a href="{{ route('service.show', $service->slug) }}" class="alternate">
+                                        <strong>{{ $service->translate()->title }}</strong>
+                                        <span class="desc">{{ \Illuminate\Support\Str::limit($service->translate()->excerpt, 120,'...') }}</span>
+                                    </a>
+                                </div>`
+                            @endforeach
+
+                        </div>
+                    </article>
+                </div>
+                    @endif
+            </div>
+        </div>
+    </section>
+{{--
 
     <!--Main Features-->
     <section class="main-features">
         <div class="auto-container">
             <div class="title-box text-center">
-                <h1>30000+</h1>
-                <h2>People Working With US</h2>
-                <div class="text">Lorem ipsum dolor sit amet, pro in harum aperiri persecuti, eu mea minim platonem, mea cetero intellegam eu. Mel ferri</div>
+                <h2>{{ __('Services') }}</h2>
+                <div class="text">Chúng tôi bảo đảm cung cấp các dịch vụ tốt nhất cho đối tác - khách hàng</div>
             </div>
 
             <div class="row clearfix">
@@ -163,17 +222,7 @@
                     <article class="inner-box">
                         <div class="icon-box">
                             <div class="icon"><span class="flaticon-illumination"></span></div>
-                            <h3 class="title">ECO SYSTEM</h3>
-                        </div>
-                    </article>
-                </div>
-
-                <!--Feature Column-->
-                <div class="features-column col-lg-3 col-md-6 col-xs-12">
-                    <article class="inner-box">
-                        <div class="icon-box">
-                            <div class="icon"><span class="flaticon-arrows-3"></span></div>
-                            <h3 class="title">Recycling</h3>
+                            <h3 class="title">{{ __('Energy') }}</h3>
                         </div>
                     </article>
                 </div>
@@ -183,7 +232,7 @@
                     <article class="inner-box">
                         <div class="icon-box">
                             <div class="icon"><span class="flaticon-nature-1"></span></div>
-                            <h3 class="title">Water Refine</h3>
+                            <h3 class="title">{{ __('Resources') }}</h3>
                         </div>
                     </article>
                 </div>
@@ -193,7 +242,17 @@
                     <article class="inner-box">
                         <div class="icon-box">
                             <div class="icon"><span class="flaticon-summer-3"></span></div>
-                            <h3 class="title">Solar SYSTEM</h3>
+                            <h3 class="title">{{ __('Astronomy') }}</h3>
+                        </div>
+                    </article>
+                </div>
+
+                <!--Feature Column-->
+                <div class="features-column col-lg-3 col-md-6 col-xs-12">
+                    <article class="inner-box">
+                        <div class="icon-box">
+                            <div class="icon"><span class="flaticon-arrows-3"></span></div>
+                            <h3 class="title">{{ __('The universe') }}</h3>
                         </div>
                     </article>
                 </div>
@@ -201,6 +260,7 @@
             </div>
         </div>
     </section>
+--}}
 
 
     <!--Featured Fluid Section-->
@@ -210,17 +270,16 @@
         <div class="outer clearfix">
 
             <!--Image Column-->
-            <div class="image-column" style="background-image:url(assets/images/resource/fluid-image-1.jpg);"></div>
+            <div class="image-column" style="background-image:url({{ Voyager::image( $about->image ) }});"></div>
 
             <!--Text Column-->
-            <article class="column text-column dark-column wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms" style="background-image:url(assets/images/resource/fluid-image-2.jpg);">
+            <article class="column text-column dark-column wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms" style="background-image:url({{ Voyager::image( $about->image ) }});">
 
                 <div class="content-box pull-left">
-                    <h2>Join <span class="theme_color">our event</span> &amp; helping us by donation</h2>
-                    <div class="title-text">Lorem ipsum dolor <a href="#"><strong>some link</strong></a> sit amet, cum at inani interesset </div>
-                    <div class="text">Lorem ipsum dolor sit amet, eu qui modo expetendis reformidans ex sit set appetere sententiae seo eum in simul homero. Duo consul lorem probatus no qu alterum sit at no simple dummy.</div>
-                    <a href="#" class="theme-btn btn-style-one">Join Now</a>
-                    <a href="#" class="theme-btn btn-style-two">View details</a>
+                    <h2>{{ $about->translate()->title }}</h2>
+                    <div class="title-text"></div>
+                    <div class="text">{{ $about->translate()->excerpt }}</div>
+                    <a href="{{ route('about.index') }}" class="theme-btn btn-style-two">{{ __('View details') }}</a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -237,79 +296,36 @@
 
             <div class="sec-title clearfix">
                 <div class="pull-left">
-                    <h2>RECENT <span class="normal-font theme_color">Project</span></h2>
-                    <div class="text">Lorem ipsum dolor sit amet, cum at inani interesset, nisl fugit munere ad mel,vix an omnium dolor amet </div>
+                    <h2><span class="normal-font theme_color">{{ __('Recent project') }}</span></h2>
+                    <div class="text"> </div>
                 </div>
                 <div class="pull-right padd-top-30">
-                    <a href="#" class="theme-btn btn-style-three">See All Projects</a>
+                    <a href="{{ route('project.index') }}" class="theme-btn btn-style-three">{{ __('See All Projects') }}</a>
                 </div>
             </div>
             <div class="row clearfix">
-
+                @foreach($projects as $key=>$project)
                 <!--Default Featured Column-->
                 <div class="column default-featured-column col-md-3 col-sm-6 col-xs-12">
                     <article class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/featured-image-1.jpg" alt=""></a>
+                            <a href="{{ route('project.show', $project->slug) }}"><img src="{{ Voyager::image( $project->image ) }}" alt="{{ $project->translate()->title }}"></a>
                         </figure>
                         <div class="content-box">
-                            <h3><a href="#">Project Name</a></h3>
-                            <div class="column-info">Environment, Go Green Company</div>
-                            <div class="text">Lorem ipsum dolor sit amet et siu amet amet audiam copiosaei mei purto dolor timeam mea ne.</div>
-                            <a href="#" class="theme-btn btn-style-three">Learn More</a>
+                            <h3><a href="{{ route('project.show', $project->slug) }}">{{ \Illuminate\Support\Str::limit($project->translate()->title, 40,'...') }}</a></h3>
+                            <div class="column-info">{{ $project->created_at->format('d/m/Y') }}</div>
+                            <div class="text">{{ \Illuminate\Support\Str::limit($project->translate()->excerpt, 120,'...') }}</div>
+                            <a href="{{ route('project.show', $project->slug) }}" class="theme-btn btn-style-three">{{ __('Read More') }}</a>
                         </div>
                     </article>
                 </div>
-
-                <!--Default Featured Column-->
-                <div class="column default-featured-column col-md-3 col-sm-6 col-xs-12">
-                    <article class="inner-box wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
-                        <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/featured-image-2.jpg" alt=""></a>
-                        </figure>
-                        <div class="content-box">
-                            <h3><a href="#">Project Name</a></h3>
-                            <div class="column-info">Environment, Go Green Company</div>
-                            <div class="text">Lorem ipsum dolor sit amet et siu amet amet audiam copiosaei mei purto dolor timeam mea ne.</div>
-                            <a href="#" class="theme-btn btn-style-three">Learn More</a>
-                        </div>
-                    </article>
-                </div>
-
-                <!--Default Featured Column-->
-                <div class="column default-featured-column col-md-3 col-sm-6 col-xs-12">
-                    <article class="inner-box wow fadeInLeft" data-wow-delay="600ms" data-wow-duration="1500ms">
-                        <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/featured-image-3.jpg" alt=""></a>
-                        </figure>
-                        <div class="content-box">
-                            <h3><a href="#">Project Name</a></h3>
-                            <div class="column-info">Environment, Go Green Company</div>
-                            <div class="text">Lorem ipsum dolor sit amet et siu amet amet audiam copiosaei mei purto dolor timeam mea ne.</div>
-                            <a href="#" class="theme-btn btn-style-three">Learn More</a>
-                        </div>
-                    </article>
-                </div>
-
-                <!--Default Featured Column-->
-                <div class="column default-featured-column col-md-3 col-sm-6 col-xs-12">
-                    <article class="inner-box wow fadeInLeft" data-wow-delay="900ms" data-wow-duration="1500ms">
-                        <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/featured-image-4.jpg" alt=""></a>
-                        </figure>
-                        <div class="content-box">
-                            <h3><a href="#">Project Name</a></h3>
-                            <div class="column-info">Environment, Go Green Company</div>
-                            <div class="text">Lorem ipsum dolor sit amet et siu amet amet audiam copiosaei mei purto dolor timeam mea ne.</div>
-                            <a href="#" class="theme-btn btn-style-three">Learn More</a>
-                        </div>
-                    </article>
-                </div>
+                @endforeach
 
             </div>
         </div>
     </section>
 
+{{--
 
     <!--Two Column Fluid -->
     <section class="two-column-fluid">
@@ -460,61 +476,32 @@
         </div>
     </section>
 
+--}}
 
     <!--Testimonials-->
     <section class="testimonials-section" style="background-image:url('assets/images/background/testimonials-bg.jpg');">
         <div class="auto-container">
 
             <div class="sec-title text-center">
-                <h2>Testi<span class="normal-font theme_color">Monials</span></h2>
-                <div class="text">Lorem ipsum dolor sit amet, cum at inani interes setnisl omnium dolor amet amet qco modo cum text </div>
+                <h2>{{ __('Teams') }}</h2>
+                <div class="text">Với đội ngũ nhân lực chất lượng cao chúng tôi sẽ cung câp cho khách hàng những dịch vụ tốt nhất</div>
             </div>
 
             <!--Slider-->
             <div class="testimonials-slider testimonials-carousel">
-
+                @foreach($teams as $key=>$team)
                 <!--Slide-->
                 <article class="slide-item">
-
                     <div class="info-box">
-                        <figure class="image-box"><img src="assets/images/resource/testi-image-1.jpg" alt=""></figure>
-                        <h3>Mark Pine</h3>
-                        <p class="designation">Rome, Italy</p>
+                        <figure class="image-box"><img src="{{ Voyager::image( $team->image ) }}" alt="{{ $team->translate()->name }}"></figure>
+                        <h3>{{ $team->translate()->name }}</h3>
+                        <p class="designation">{{ $team->translate()->position }}</p>
                     </div>
-
                     <div class="slide-text">
-                        <p>“But I must explain to you the how all this mistaken idea of thealorem qco denouncing pleasure”</p>
+                        <p>“{{ $team->translate()->description }}”</p>
                     </div>
                 </article>
-
-                <!--Slide-->
-                <article class="slide-item">
-
-                    <div class="info-box">
-                        <figure class="image-box"><img src="assets/images/resource/testi-image-2.jpg" alt=""></figure>
-                        <h3>Mark Pine</h3>
-                        <p class="designation">Rome, Italy</p>
-                    </div>
-
-                    <div class="slide-text">
-                        <p>“But I must explain to you the how all this mistaken idea of thealorem qco denouncing pleasure”</p>
-                    </div>
-                </article>
-
-                <!--Slide-->
-                <article class="slide-item">
-
-                    <div class="info-box">
-                        <figure class="image-box"><img src="assets/images/resource/testi-image-3.jpg" alt=""></figure>
-                        <h3>Mark Pine</h3>
-                        <p class="designation">Rome, Italy</p>
-                    </div>
-
-                    <div class="slide-text">
-                        <p>“But I must explain to you the how all this mistaken idea of thealorem qco denouncing pleasure”</p>
-                    </div>
-                </article>
-
+                    @endforeach
 
             </div>
 
@@ -528,85 +515,40 @@
         <div class="auto-container">
 
             <div class="sec-title text-center">
-                <h2>Latest <span class="normal-font theme_color">News</span></h2>
+                <h2><span class="normal-font theme_color">{{ __('Latest News') }}</span></h2>
                 <div class="text">Lorem ipsum dolor sit amet, cum at inani interessetnisl omnium dolor amet amet qco modo cum text </div>
             </div>
             <div class="row clearfix">
-
+            @foreach($blogs as $key=>$blog)
                 <!--News Column-->
                 <div class="column blog-news-column col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <article class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/blog-image-1.jpg" alt=""></a>
-                            <div class="news-date">28<span class="month">OCT</span></div>
+                            <a href="{{ route('blogs.show', $blog->slug) }}"><img src="{{ Voyager::image( $blog->image ) }}" alt="{{ $blog->translate()->title }}"></a>
+                            <div class="news-date">{{ $blog->created_at->format('d') }}<span class="month">{{ $blog->created_at->format('m') }}</span></div>
                         </figure>
                         <div class="content-box">
-                            <h3><a href="#">Melting ice</a></h3>
+                            <h3><a href="{{ route('blogs.show', $blog->slug) }}">{{ \Illuminate\Support\Str::limit($project->translate()->title, 40,'...') }}</a></h3>
                             <div class="post-info clearfix">
-                                <div class="post-author">Posted by Rashed Kabir</div>
+                                <div class="post-author">Posted by Admin</div>
                                 <div class="post-options clearfix">
-                                    <a href="#" class="comments-count"><span class="icon flaticon-communication-2"></span> 6</a>
-                                    <a href="#" class="fav-count"><span class="icon flaticon-favorite-1"></span> 14</a>
+                                    <a href="#" class="comments-count"><span class="icon flaticon-communication-2"></span> {{ rand(0,100) }}</a>
+                                    <a href="#" class="fav-count"><span class="icon flaticon-favorite-1"></span> {{ rand(0,200) }}</a>
                                 </div>
                             </div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipi elit sed do eiusmod tempor incididunt ut modo labore et dolore magna aliqua veniam...</div>
-                            <a href="#" class="theme-btn read-more">Read More</a>
+                            <div class="text">{{ \Illuminate\Support\Str::limit($project->translate()->title, 80,'...') }}</div>
+                            <a href="{{ route('blogs.show', $blog->slug) }}" class="theme-btn read-more">{{ __('Read More') }}</a>
                         </div>
                     </article>
                 </div>
-
-                <!--News Column-->
-                <div class="column blog-news-column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <article class="inner-box wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
-                        <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/blog-image-2.jpg" alt=""></a>
-                            <div class="news-date">22<span class="month">APR</span></div>
-                        </figure>
-                        <div class="content-box">
-                            <h3><a href="#">Deforestation is the threat</a></h3>
-                            <div class="post-info clearfix">
-                                <div class="post-author">Posted by Rashed Kabir</div>
-                                <div class="post-options clearfix">
-                                    <a href="#" class="comments-count"><span class="icon flaticon-communication-2"></span> 6</a>
-                                    <a href="#" class="fav-count"><span class="icon flaticon-favorite-1"></span> 14</a>
-                                </div>
-                            </div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipi elit sed do eiusmod tempor incididunt ut modo labore et dolore magna aliqua veniam...</div>
-                            <a href="#" class="theme-btn read-more">Read More</a>
-                        </div>
-                    </article>
-                </div>
-
-                <!--News Column-->
-                <div class="column blog-news-column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <article class="inner-box wow fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                        <figure class="image-box">
-                            <a href="#"><img src="assets/images/resource/blog-image-3.jpg" alt=""></a>
-                            <div class="news-date">23<span class="month">MAR</span></div>
-                        </figure>
-                        <div class="content-box">
-                            <h3><a href="#">Save the animals</a></h3>
-                            <div class="post-info clearfix">
-                                <div class="post-author">Posted by Rashed Kabir</div>
-                                <div class="post-options clearfix">
-                                    <a href="#" class="comments-count"><span class="icon flaticon-communication-2"></span> 6</a>
-                                    <a href="#" class="fav-count"><span class="icon flaticon-favorite-1"></span> 14</a>
-                                </div>
-                            </div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipi elit sed do eiusmod tempor incididunt ut modo labore et dolore magna aliqua veniam...</div>
-                            <a href="#" class="theme-btn read-more">Read More</a>
-                        </div>
-                    </article>
-                </div>
-
-
+            @endforeach
             </div>
         </div>
     </section>
 
 
     <!--Sponsors Section-->
-    <section class="sponsors-section">
+    {{--<section class="sponsors-section">
         <div class="auto-container">
             <div class="slider-outer">
                 <!--Sponsors Slider-->
@@ -620,6 +562,6 @@
             </div>
 
         </div>
-    </section>
+    </section>--}}
 
 @endsection

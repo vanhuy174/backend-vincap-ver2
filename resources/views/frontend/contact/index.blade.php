@@ -18,12 +18,12 @@
             <!--Info Column-->
             <div class="column info-column col-lg-5 col-md-6 col-sm-12 col-xs-12">
                 <article class="inner-box">
-                    <h3 class="margin-bott-20">{{ setting('site.title') }}</h3>
-                    <div class="text margin-bott-40">{{ setting('site.description') }}</div>
+                    <h3 class="margin-bott-20">{{ setting("$lang.title") }}</h3>
+                    <div class="text margin-bott-40">{{ setting("$lang.description") }}</div>
                     <ul class="info-box">
-                        <li><span class="icon flaticon-location"></span><strong>{{ __('Address') }}</strong> {{ setting('info.address') }}</li>
-                        <li><span class="icon flaticon-technology-5"></span><strong>{{ __('Phone') }}</strong> <a href="tel:{{ setting('info.phone') }}">{{ setting('info.phone') }}</a></li>
-                        <li><span class="icon flaticon-interface-1"></span><strong>Email</strong> <a href="mailto:{{ setting('info.email') }}">{{ setting('info.email') }}</a></li>
+                        <li><span class="icon flaticon-location"></span><strong>{{ __('Address') }}</strong> {{ setting("$lang.address") }}</li>
+                        <li><span class="icon flaticon-technology-5"></span><strong>{{ __('Phone') }}</strong> <a href="tel:{{ setting("$lang.phone") }}">{{ setting("$lang.phone") }}</a></li>
+                        <li><span class="icon flaticon-interface-1"></span><strong>Email</strong> <a href="mailto:{{ setting("$lang.email") }}">{{ setting("$lang.email") }}</a></li>
                     </ul>
                 </article>
             </div>
@@ -53,17 +53,7 @@
                     <!--Map Container-->
                     <div class="map-container">
                         <!--Map Canvas-->
-                        <div class="map-canvas"
-                             data-zoom="12"
-                             data-lat="-37.817085"
-                             data-lng="144.955631"
-                             data-type="roadmap"
-                             data-hue="#ffc400"
-                             data-title="Envato"
-                             data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>"
-                             style="height: 380px;">
-                        </div>
-
+                        {!! setting('site.google-map') !!}
                     </div>
                 </article>
             </div>
@@ -87,7 +77,6 @@
                             <div class="form-group col-md-12 col-xs-12">
                                 <textarea name="message" placeholder="{{ __('Message') }}"></textarea>
                             </div>
-
                             <!--Form Group-->
                             <div class="form-group col-md-12 col-xs-12">
                                 <div class="text-right"><button type="submit" class="theme-btn btn-style-two">{{ __('Send') }}</button></div>

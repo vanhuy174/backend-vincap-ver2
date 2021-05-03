@@ -28,6 +28,10 @@ Route::group([], function (){
     Route::resource('/blogs', \App\Http\Controllers\BlogController::class);
     Route::resource('about', \App\Http\Controllers\AboutController::class);
     Route::resource('contact', \App\Http\Controllers\ContactController::class);
+    Route::resource('data', \App\Http\Controllers\DataController::class);
+    Route::resource('product', \App\Http\Controllers\ProductController::class);
+    Route::resource('service', \App\Http\Controllers\ServiceController::class);
+    Route::resource('project', \App\Http\Controllers\ProjectController::class);
 });
 
 Route::group(['prefix' => 'admin'], function () {

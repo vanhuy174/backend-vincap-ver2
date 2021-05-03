@@ -3,29 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use App\Slide;
-use App\Team;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Page;
 use TCG\Voyager\Models\Post;
 
-class HomeController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $slides =   Slide::with('translations')->get();
-        $projects= Product::where('type', 'project')->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->limit(4)->get();
-        $blogs= Post::where('status', 'PUBLISHED')->where('status', 'PUBLISHED')->orderBy('created_at', 'DESC')->withTranslation()->limit(3)->get();
-        $about= Page::where('slug', 'about')->withTranslation()->firstOrFail();
-        $services =Product::where('type', 'service')->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->limit(6)->get();
-        $teams =Team::orderBy('created_at', 'DESC')->withTranslation()->get();
-
-        return view('frontend.home.index', compact('slides', 'projects', 'blogs', 'about', 'services', 'teams'));
+        $page       =   Page::where('slug', 'blogs')->withTranslation()->firstOrFail();
+        $projects   =   Product::where('type', 'service')->where('status', 'ACTIVE')->paginate(5);
+        return view('frontend.service.index', compact('page', 'projects'));
     }
 
     /**
@@ -57,7 +50,9 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $data= Product::where('slug', $id)->where('type', 'service')->where('status', 'ACTIVE')->orderBy('created_at', 'DESC')->withTranslation()->firstOrFail();
+
+        return view('frontend/product/productDetail', compact('data' ));
     }
 
     /**
